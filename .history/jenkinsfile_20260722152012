@@ -40,7 +40,11 @@ stage('Check Variables') {
     }
 }
 
-
+stage('Docker Login & Push') {
+    steps {
+        
+    }
+}
 
         stage('Docker Login & Push') {
             steps {
