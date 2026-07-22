@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Getting code from GitHub'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t hello-world-app .'
+            }
+        }
+          
+          stage('Check Docker User'){
+            steps{
+                bat'docker info'
+            }
+          }
+
+          stage('Docker Build') {
+    steps {
+        bat 'docker build -t hello-world-app .'
+    }
+}
+
+stage('Check Variables') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-creds',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASS'
+        )]) {
+            bat 'echo Username=%DOCKER_USER%'
+            bat 'echo %DOCKER_PASS%'
+        }
+    }
+}
+
+stage('Docker Login & Push') {
+    steps {
+        ...
+    }
+}
+
+        stage('Docker Login & Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                        bat 'echo Username=%DOCKER_USER%'
+            bat 'docker logout'
+            bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
+                }
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                bat 'docker run %DOCKER_USER%/hello-world-app'
+            }
+        }
+    }
+}
