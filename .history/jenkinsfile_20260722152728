@@ -14,7 +14,7 @@ pipeline {
                 bat 'docker build -t hello-world-app .'
             }
         }
-        //add comment for docker build stage
+        //add
           
           stage('Check Docker User'){
             steps{
