@@ -59,7 +59,7 @@ stage('Docker Login & Push') {
                 }
             }
         }
-        //Added comment for jenkins pipeline testing
+        //Added comment for jenkins pipeline
 
         stage('Docker Run') {
             steps {
