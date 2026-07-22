@@ -60,7 +60,7 @@ stage('Check Variables') {
         stage('Docker Run') {
             steps {
                 bat 'docker run %DOCKER_USER%/hello-world-app'
-                //added coment for running docker image
+                //added coment for running
             }
         }
     }
